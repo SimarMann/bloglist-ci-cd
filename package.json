@@ -1,0 +1,33 @@
+{
+  "name": "bloglist-ci-cd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "mongoose": "^8.4.1",
+    "mongoose-unique-validator": "^5.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "chokidar": "^3.6.0",
+    "dotenv": "^16.4.5"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@controllers": "server/controllers",
+    "@models": "server/models",
+    "@middleware": "server/middleware",
+    "@util": "server/util"
+  }
+}
