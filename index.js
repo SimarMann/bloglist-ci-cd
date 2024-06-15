@@ -24,8 +24,9 @@ watcher.on('ready', () => {
   })
 })
 
-// Comment out frontend related code
-/*
+/**
+ * For frontend use hot loading when in development, else serve the static content
+ */
 if (!inProduction) {
   // eslint-disable-next-line
   const webpack = require('webpack');
@@ -56,12 +57,6 @@ if (!inProduction) {
   app.use(express.static(DIST_PATH));
   app.get('*', (req, res) => res.sendFile(INDEX_PATH));
 }
-*/
-
-// Serve a simple message indicating backend is running
-app.get('/', (req, res) => {
-  res.send('Backend server is running successfully!');
-});
 
 app.listen(PORT, () => {
   console.log(`Started on port ${PORT}`)
