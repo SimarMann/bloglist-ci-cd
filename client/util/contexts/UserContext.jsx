@@ -1,15 +1,15 @@
-import { createContext, useReducer, useContext, useMemo } from "react";
+import { createContext, useReducer, useContext, useMemo } from 'react';
 
-import storageService from "Utilities/services/storageService";
-import loginService from "Utilities/services/loginService";
+import storageService from 'Utilities/services/storageService';
+import loginService from 'Utilities/services/loginService';
 
 const initialState = storageService.loadUser();
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_USER":
+    case 'SET_USER':
       return action.payload;
-    case "LOGOUT_USER":
+    case 'LOGOUT_USER':
       return null;
     default:
       return state;
@@ -23,12 +23,12 @@ export function UserContextProvider({ children }) {
 
   const loginUser = async (username, password) => {
     const newUser = await loginService.login({ username, password });
-    dispatch({ type: "SET_USER", payload: newUser });
+    dispatch({ type: 'SET_USER', payload: newUser });
     storageService.saveUser(newUser);
   };
 
   const logoutUser = () => {
-    dispatch({ type: "LOGOUT_USER" });
+    dispatch({ type: 'LOGOUT_USER' });
     storageService.removeUser();
   };
 

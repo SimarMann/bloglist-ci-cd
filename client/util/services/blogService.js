@@ -1,7 +1,7 @@
-import axios from "axios";
-import storageService from "Utilities/services/storageService";
+import axios from 'axios';
+import storageService from 'Utilities/services/storageService';
 
-const baseUrl = "/api/blogs";
+const baseUrl = '/api/blogs';
 
 const setAuth = () => ({
   Authorization: storageService.loadUser()?.token

@@ -1,34 +1,33 @@
-require('dotenv').config()
-require('module-alias/register')
-const chokidar = require('chokidar')
-const express = require('express')
-const path = require('path')
-require('express-async-errors')
+require('dotenv').config();
+require('module-alias/register');
+const chokidar = require('chokidar');
+const express = require('express');
+const path = require('path');
+require('express-async-errors');
 
-const { PORT, inProduction } = require('@util/common')
+const { PORT, inProduction } = require('@util/common');
 
-const app = express()
+const app = express();
 
 // Require is here so we can delete it from cache when files change (*)
-app.use('/api', (req, res, next) => require('@root/server')(req, res, next)) // eslint-disable-line
+app.use('/api', (req, res, next) => require('@root/server')(req, res, next)); // eslint-disable-line
 
 /**
  *  Use "hot loading" in backend
  */
-const watcher = chokidar.watch('server') // Watch server folder
+const watcher = chokidar.watch('server'); // Watch server folder
 watcher.on('ready', () => {
   watcher.on('all', () => {
     Object.keys(require.cache).forEach((id) => {
-      if (id.includes('server')) delete require.cache[id] // Delete all require caches that point to server folder (*)
-    })
-  })
-})
+      if (id.includes('server')) delete require.cache[id]; // Delete all require caches that point to server folder (*)
+    });
+  });
+});
 
 /**
  * For frontend use hot loading when in development, else serve the static content
  */
 if (!inProduction) {
-  // eslint-disable-next-line
   const webpack = require('webpack');
   const middleware = require('webpack-dev-middleware');
   const hotMiddleWare = require('webpack-hot-middleware');
@@ -59,5 +58,6 @@ if (!inProduction) {
 }
 
 app.listen(PORT, () => {
-  console.log(`Started on port ${PORT}`)
-})
+  // eslint-disable-next-line no-console
+  console.log(`Started on port ${PORT}`);
+});

@@ -1,18 +1,18 @@
-import { useRef } from "react";
-import { Routes, Route, Navigate, useMatch, Link } from "react-router-dom";
-import { Container, Toolbar, Button, AppBar } from "@mui/material";
-import { useUserValue } from "Utilities/contexts/UserContext";
-import { useGetAllBlogs } from "Utilities/queries/BlogsQuery";
+import { useRef } from 'react';
+import { Routes, Route, Navigate, useMatch, Link } from 'react-router-dom';
+import { Container, Toolbar, Button, AppBar } from '@mui/material';
+import { useUserValue } from 'Utilities/contexts/UserContext';
+import { useGetAllBlogs } from 'Utilities/queries/BlogsQuery';
 
-import BlogList from "Components/BlogList";
-import Blog from "Components/Blog";
-import Login from "Components/Login";
-import Logout from "Components/Logout";
-import BlogForm from "Components/BlogForm";
-import Notification from "Components/Notification";
-import Togglable from "Components/Togglable";
-import Users from "Components/Users";
-import User from "Components/User";
+import BlogList from 'Components/BlogList';
+import Blog from 'Components/Blog';
+import Login from 'Components/Login';
+import Logout from 'Components/Logout';
+import BlogForm from 'Components/BlogForm';
+import Notification from 'Components/Notification';
+import Togglable from 'Components/Togglable';
+import Users from 'Components/Users';
+import User from 'Components/User';
 
 function Home({ blogs }) {
   const blogFormRef = useRef();
@@ -50,7 +50,7 @@ function Navigation({ user }) {
       </div>
     </>
   ) : (
-    ""
+    ''
   );
 }
 
@@ -58,7 +58,7 @@ function App() {
   const user = useUserValue();
 
   const { data: result, isLoading, isError } = useGetAllBlogs();
-  const match = useMatch("/blogs/:id");
+  const match = useMatch('/blogs/:id');
 
   if (isLoading) {
     return <div>loading data...</div>;

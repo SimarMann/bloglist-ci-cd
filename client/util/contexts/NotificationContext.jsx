@@ -1,10 +1,10 @@
-import { createContext, useReducer, useContext, useMemo } from "react";
+import { createContext, useReducer, useContext, useMemo } from 'react';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET":
+    case 'SET':
       return action.payload;
-    case "CLEAR":
+    case 'CLEAR':
       return {
         message: null,
         color: null,
@@ -42,9 +42,9 @@ export const useNotify = () => {
   const valueAndDispatch = useContext(NotificationContext);
   const dispatch = valueAndDispatch[1];
   return (payload) => {
-    dispatch({ type: "SET", payload });
+    dispatch({ type: 'SET', payload });
     setTimeout(() => {
-      dispatch({ type: "CLEAR" });
+      dispatch({ type: 'CLEAR' });
     }, 5000);
   };
 };

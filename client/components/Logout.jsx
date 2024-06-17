@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
-import { useNotify } from "Utilities/contexts/NotificationContext";
-import { useUserValue, useLogout } from "Utilities/contexts/UserContext";
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { useNotify } from 'Utilities/contexts/NotificationContext';
+import { useUserValue, useLogout } from 'Utilities/contexts/UserContext';
 
 function Logout() {
   const user = useUserValue();
@@ -13,9 +13,9 @@ function Logout() {
     logoutUser();
     notifyWith({
       message: `logged out!`,
-      color: "success",
+      color: 'success',
     });
-    navigate("/login");
+    navigate('/login');
   };
 
   return (

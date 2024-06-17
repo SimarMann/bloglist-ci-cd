@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { useNavigate } from "react-router-dom";
-import { TextField, Button } from "@mui/material";
-import { useNotify } from "Utilities/contexts/NotificationContext";
-import { useLogin } from "Utilities/contexts/UserContext";
+import { useNavigate } from 'react-router-dom';
+import { TextField, Button } from '@mui/material';
+import { useNotify } from 'Utilities/contexts/NotificationContext';
+import { useLogin } from 'Utilities/contexts/UserContext';
 
 function Login() {
   const loginUser = useLogin();
@@ -13,19 +13,19 @@ function Login() {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
-    event.target.username.value = "";
-    event.target.password.value = "";
+    event.target.username.value = '';
+    event.target.password.value = '';
     try {
       await loginUser(username, password);
       notifyWith({
         message: `welcome!`,
-        color: "success",
+        color: 'success',
       });
-      navigate("/");
+      navigate('/');
     } catch (error) {
       notifyWith({
         message: `wrong username or password`,
-        color: "error",
+        color: 'error',
       });
     }
   };

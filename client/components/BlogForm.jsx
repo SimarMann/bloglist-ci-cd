@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { Button, TextField } from "@mui/material";
-import { useAddBlog } from "Utilities/queries/BlogsQuery";
+import { Button, TextField } from '@mui/material';
+import { useAddBlog } from 'Utilities/queries/BlogsQuery';
 
 function BlogForm({ onCreate }) {
   const blogMutation = useAddBlog();
@@ -10,9 +10,9 @@ function BlogForm({ onCreate }) {
     const title = event.target.title.value;
     const author = event.target.author.value;
     const url = event.target.url.value;
-    event.target.title.value = "";
-    event.target.author.value = "";
-    event.target.url.value = "";
+    event.target.title.value = '';
+    event.target.author.value = '';
+    event.target.url.value = '';
     blogMutation.mutate({ title, author, url });
     onCreate();
   };

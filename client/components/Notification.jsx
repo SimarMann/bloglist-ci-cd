@@ -1,5 +1,5 @@
-import { Alert } from "@mui/material";
-import { useNotificationValue } from "Utilities/contexts/NotificationContext";
+import { Alert } from '@mui/material';
+import { useNotificationValue } from 'Utilities/contexts/NotificationContext';
 
 function Notification() {
   const notification = useNotificationValue();

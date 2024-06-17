@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -6,7 +6,7 @@ import {
   TableContainer,
   TableRow,
   Paper,
-} from "@mui/material";
+} from '@mui/material';
 
 function BlogList({ blogs }) {
   return (

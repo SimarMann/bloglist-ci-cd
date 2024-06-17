@@ -1,6 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { useLikeBlog, useRemoveBlog, useCommentBlog } from "Utilities/queries/BlogsQuery";
-import { useUserValue } from "Utilities/contexts/UserContext";
+import { useNavigate } from 'react-router-dom';
+import {
+  useLikeBlog,
+  useRemoveBlog,
+  useCommentBlog,
+} from 'Utilities/queries/BlogsQuery';
+import { useUserValue } from 'Utilities/contexts/UserContext';
 
 function Blog({ blog }) {
   const user = useUserValue();
@@ -25,7 +29,7 @@ function Blog({ blog }) {
     );
     if (ok) {
       removeMutation.mutate(removeBlog);
-      navigate("/");
+      navigate('/');
     }
   };
 
@@ -33,7 +37,7 @@ function Blog({ blog }) {
     event.preventDefault();
     const comment = event.target.comment.value;
     /* eslint-disable-next-line no-param-reassign */
-    event.target.comment.value = "";
+    event.target.comment.value = '';
     const blogComment = {
       id: blog.id,
       comment,

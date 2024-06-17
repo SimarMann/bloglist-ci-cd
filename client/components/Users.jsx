@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {
   Table,
   TableHead,
@@ -7,8 +7,8 @@ import {
   TableContainer,
   TableRow,
   Paper,
-} from "@mui/material";
-import { useGetAllUsers } from "Utilities/queries/UsersQuery";
+} from '@mui/material';
+import { useGetAllUsers } from 'Utilities/queries/UsersQuery';
 
 function Users() {
   const { data: result, isLoading, isError } = useGetAllUsers();
