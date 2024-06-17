@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require */
 require('dotenv').config();
 require('module-alias/register');
 const chokidar = require('chokidar');
@@ -10,7 +12,7 @@ const { PORT, inProduction } = require('@util/common');
 const app = express();
 
 // Require is here so we can delete it from cache when files change (*)
-app.use('/api', (req, res, next) => require('@root/server')(req, res, next)); // eslint-disable-line
+app.use('/api', (req, res, next) => require('@root/server')(req, res, next));
 
 /**
  *  Use "hot loading" in backend

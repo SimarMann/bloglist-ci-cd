@@ -1,4 +1,5 @@
 const common = require('@root/config/common');
+// eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config();
 
 const PORT = process.env.PORT || 8000;

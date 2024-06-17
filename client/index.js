@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { UserContextProvider } from 'Utilities/contexts/UserContext';
@@ -22,6 +22,6 @@ const refresh = () =>
 
 refresh();
 
-if (module.hot) {
-  module.hot.accept();
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept();
 }

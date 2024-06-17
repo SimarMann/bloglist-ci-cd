@@ -9,7 +9,9 @@ module.exports = {
     'airbnb/hooks',
     'plugin:prettier/recommended',
     'plugin:react/jsx-runtime',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
+  plugins: ['@tanstack/query'],
   overrides: [
     {
       env: {
