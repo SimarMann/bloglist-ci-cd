@@ -4,6 +4,7 @@ const middleware = require('@middleware/middleware');
 const logger = require('@util/logger');
 const mongoose = require('mongoose');
 const common = require('@util/common');
+require('express-async-errors');
 
 const app = express();
 

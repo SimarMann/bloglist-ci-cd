@@ -17,6 +17,10 @@ blogsRouter.post('/', middleware.userExtractor, async (request, response) => {
 
   const { user } = request;
 
+  if (!user) {
+    return response.status(403).json({ error: 'user missing' });
+  }
+
   const blog = new Blog({
     title: body.title,
     author: body.author,
@@ -25,6 +29,10 @@ blogsRouter.post('/', middleware.userExtractor, async (request, response) => {
     user: user.id,
     comments: [],
   });
+
+  if (!blog.title || !blog.url) {
+    return response.status(400).json({ error: 'title or url missing' });
+  }
 
   const savedBlog = await blog.save();
   user.blogs = user.blogs.concat(savedBlog.id);
