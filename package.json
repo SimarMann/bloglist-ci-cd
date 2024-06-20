@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test:server": "cross-env NODE_ENV=test node tests/server/blog_api.test.js",
+    "test:server": "cross-env NODE_ENV=test node tests/server/api.test.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "build": "webpack --mode=production"
   },

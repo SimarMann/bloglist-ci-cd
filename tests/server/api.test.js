@@ -20,6 +20,9 @@ const testUser = {
 
 let token;
 
+/**
+ *  Blogs API test suite
+ */
 describe('when there is initially some blogs saved', () => {
   beforeEach(async () => {
     await Blog.deleteMany({});
@@ -197,6 +200,145 @@ describe('when there is initially some blogs saved', () => {
     assert.strictEqual(updatedBlog.author, newBlog.author);
     assert.strictEqual(updatedBlog.url, newBlog.url);
     assert.strictEqual(updatedBlog.likes, newBlog.likes);
+  });
+});
+
+/**
+ *  Users API test suite
+ */
+describe('when there is initially one user in db', () => {
+  beforeEach(async () => {
+    await User.deleteMany({});
+
+    await api.post('/users').send(testUser);
+  });
+
+  test('create new user', async () => {
+    const newUser = {
+      username: 'mluukkai',
+      name: 'Matti Luukkainen',
+      password: 'salainen',
+    };
+
+    const postResponse = await api
+      .post('/users')
+      .send(newUser)
+      .expect(201)
+      .expect('Content-Type', /application\/json/);
+
+    assert.strictEqual(postResponse.body.username, newUser.username);
+    assert.strictEqual(postResponse.body.name, newUser.name);
+
+    await api.get('/users');
+
+    const usersAtEnd = await helper.usersInDb();
+    const usernames = usersAtEnd.map((u) => u.username);
+    assert(usernames.includes(newUser.username));
+  });
+  test('user is not added if username is already taken', async () => {
+    const usersAtStart = await helper.usersInDb();
+
+    const newUser = {
+      username: 'root',
+      name: 'Superuser',
+      password: 'sekret',
+    };
+
+    const result = await api
+      .post('/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+
+    assert(result.body.error.includes('expected `username` to be unique'));
+
+    const usersAtEnd = await helper.usersInDb();
+    assert.strictEqual(usersAtStart.length, usersAtEnd.length);
+  });
+  test('user is not added if username is missing', async () => {
+    const usersAtStart = await helper.usersInDb();
+
+    const newUser = {
+      name: 'Superuser',
+      password: 'salainen',
+    };
+
+    const result = await api
+      .post('/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+
+    assert(result.body.error.includes('username or password missing'));
+
+    const usersAtEnd = await helper.usersInDb();
+    assert.strictEqual(usersAtStart.length, usersAtEnd.length);
+  });
+  test('user is not added if password is missing', async () => {
+    const usersAtStart = await helper.usersInDb();
+
+    const newUser = {
+      username: 'allen',
+      name: 'secondUser',
+    };
+
+    const result = await api
+      .post('/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+
+    assert(result.body.error.includes('username or password missing'));
+
+    const usersAtEnd = await helper.usersInDb();
+    assert.strictEqual(usersAtStart.length, usersAtEnd.length);
+  });
+  test('user is not added if username is not atleast 3 characters long', async () => {
+    const usersAtStart = await helper.usersInDb();
+
+    const newUser = {
+      username: 'he',
+      name: 'secondUser',
+      password: 'laz0e',
+    };
+
+    const result = await api
+      .post('/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+
+    assert(
+      result.body.error.includes(
+        'Both username and password must be at least 3 characters long',
+      ),
+    );
+
+    const usersAtEnd = await helper.usersInDb();
+    assert.strictEqual(usersAtStart.length, usersAtEnd.length);
+  });
+  test('user is not added if password is not atleast 3 characters long', async () => {
+    const usersAtStart = await helper.usersInDb();
+
+    const newUser = {
+      username: 'hellas',
+      name: 'secondUser',
+      password: 'la',
+    };
+
+    const result = await api
+      .post('/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/);
+
+    assert(
+      result.body.error.includes(
+        'Both username and password must be at least 3 characters long',
+      ),
+    );
+    const usersAtEnd = await helper.usersInDb();
+    assert.strictEqual(usersAtStart.length, usersAtEnd.length);
   });
 
   after(() => {
