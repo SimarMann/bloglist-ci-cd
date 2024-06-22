@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
+    'jest/globals': true,
   },
   extends: [
     'airbnb',
@@ -11,7 +12,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:@tanstack/eslint-plugin-query/recommended',
   ],
-  plugins: ['@tanstack/query'],
+  plugins: ['@tanstack/query', 'jest'],
   overrides: [
     {
       env: {

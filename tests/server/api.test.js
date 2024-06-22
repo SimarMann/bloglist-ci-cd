@@ -1,5 +1,5 @@
 require('module-alias/register');
-const supertest = require('supertest'); // eslint-disable-line import/no-extraneous-dependencies
+const supertest = require('supertest');
 const mongoose = require('mongoose');
 const { test, describe, after, beforeEach } = require('node:test');
 const assert = require('assert');

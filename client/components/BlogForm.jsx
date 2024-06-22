@@ -2,25 +2,11 @@
 import { Button, TextField } from '@mui/material';
 import { useAddBlog } from 'Utilities/queries/BlogsQuery';
 
-function BlogForm({ onCreate }) {
-  const blogMutation = useAddBlog();
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const title = event.target.title.value;
-    const author = event.target.author.value;
-    const url = event.target.url.value;
-    event.target.title.value = '';
-    event.target.author.value = '';
-    event.target.url.value = '';
-    blogMutation.mutate({ title, author, url });
-    onCreate();
-  };
-
+export function BlogFormContainer({ onSubmit }) {
   return (
     <div>
       <h4>Create a new blog</h4>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit} aria-label="form">
         <div>
           <TextField
             label="title"
@@ -45,12 +31,35 @@ function BlogForm({ onCreate }) {
             placeholder="url of the blog"
           />
         </div>
-        <Button variant="contained" color="primary" type="submit">
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          data-testid="createButton"
+        >
           create
         </Button>
       </form>
     </div>
   );
+}
+
+function BlogForm({ onCreate }) {
+  const blogMutation = useAddBlog();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const title = event.target.title.value;
+    const author = event.target.author.value;
+    const url = event.target.url.value;
+    event.target.title.value = '';
+    event.target.author.value = '';
+    event.target.url.value = '';
+    blogMutation.mutate({ title, author, url });
+    onCreate();
+  };
+
+  return <BlogFormContainer onSubmit={handleSubmit} />;
 }
 
 export default BlogForm;
