@@ -23,6 +23,12 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 app.use(routes);
+
+if (process.env.NODE_ENV === 'test') {
+  const testingRouter = require('@controllers/testingController'); // eslint-disable-line global-require
+  app.use('/testing', testingRouter);
+}
+
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
 

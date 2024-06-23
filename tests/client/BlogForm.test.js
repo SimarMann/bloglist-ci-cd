@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'; // eslint-disable-line import/no-extraneous-dependencies
+import userEvent from '@testing-library/user-event';
 import { BlogFormContainer } from 'Components/BlogForm';
 
 it('when blog is created, callback has correct data', async () => {

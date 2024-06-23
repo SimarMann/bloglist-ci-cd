@@ -108,3 +108,9 @@ dist
 
 #ignore vscode workspace settings
 .vscode
+
+# Ignore playwright files
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
