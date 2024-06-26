@@ -1,0 +1,32 @@
+---
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deployment_pipeline:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Test Server
+        run: npm run test:server
+      - name: Test Client
+        run: npm run test:client
+      - name: Test E2E
+        run: npm run test:e2e
+---
+

@@ -23,14 +23,21 @@ module.exports = {
         sourceType: 'script',
       },
     },
+    {
+      files: ['tests/e2e/**'],
+      extends: ['plugin:playwright/recommended'],
+    },
   ],
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
   settings: {
     react: {
-      version: '18.2',
+      version: 'detect',
     },
   },
   rules: {

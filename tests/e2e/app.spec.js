@@ -24,7 +24,7 @@ describe('Blog app', () => {
   });
 
   test('Login form is shown on front page', async ({ page }) => {
-    const locator = await page.getByText('log in to application');
+    const locator = page.getByText('log in to application');
     await expect(locator).toBeVisible();
     await expect(page.getByText('login')).toBeVisible();
   });
@@ -33,7 +33,7 @@ describe('Blog app', () => {
     test('succeeds with correct credentials', async ({ page }) => {
       await loginWith(page, 'mluukkai', 'salainen');
 
-      const successDiv = await page.locator('.MuiAlert-colorSuccess');
+      const successDiv = page.locator('.MuiAlert-colorSuccess');
       await expect(successDiv).toContainText('welcome!');
       await expect(successDiv).toHaveCSS('color', 'rgb(30, 70, 32)');
 
@@ -43,13 +43,11 @@ describe('Blog app', () => {
     test('fails with wrong credentials', async ({ page }) => {
       await loginWith(page, 'mluukkai', 'wrong');
 
-      const errorDiv = await page.locator('.MuiAlert-colorError');
+      const errorDiv = page.locator('.MuiAlert-colorError');
       await expect(errorDiv).toContainText('wrong username or password');
       await expect(errorDiv).toHaveCSS('color', 'rgb(95, 33, 32)');
 
-      await expect(
-        page.getByText('Matti Luukkainen logged in'),
-      ).not.toBeVisible();
+      await expect(page.getByText('Matti Luukkainen logged in')).toBeHidden();
     });
   });
 
@@ -94,7 +92,7 @@ describe('Blog app', () => {
         await page.getByRole('button', { name: 'like' }).click();
         await expect(page.getByText('1 likes')).toBeVisible();
 
-        const successDiv = await page.locator('.MuiAlert-colorSuccess');
+        const successDiv = page.locator('.MuiAlert-colorSuccess');
         await expect(successDiv).toContainText(
           "You liked 'You’re NOT gonna need it!' by 'Ron Jeffries",
         );
@@ -108,14 +106,14 @@ describe('Blog app', () => {
         page.on('dialog', (dialog) => dialog.accept());
         await page.getByRole('button', { name: 'delete' }).click();
 
-        const successDiv = await page.locator('.MuiAlert-colorSuccess');
+        const successDiv = page.locator('.MuiAlert-colorSuccess');
         await expect(successDiv).toContainText(
           "The blog 'You’re NOT gonna need it!' by 'Ron Jeffries was removed",
         );
         await expect(successDiv).toHaveCSS('color', 'rgb(30, 70, 32)');
         await expect(
           page.getByRole('link', { name: 'You’re NOT gonna need it!' }),
-        ).not.toBeVisible();
+        ).toBeHidden();
       });
 
       test('only the user who added the blog sees the delete button', async ({
@@ -126,9 +124,7 @@ describe('Blog app', () => {
         await page
           .getByRole('link', { name: 'You’re NOT gonna need it!' })
           .click();
-        await expect(
-          page.getByRole('button', { name: 'delete' }),
-        ).not.toBeVisible();
+        await expect(page.getByRole('button', { name: 'delete' })).toBeHidden();
       });
     });
 
@@ -166,9 +162,10 @@ describe('Blog app', () => {
 
         await page.goto('/');
         await expect(page.getByText('blog2')).toBeVisible();
-        const blogsOrder = await page.$$eval('.blog a', (links) =>
-          links.map((link) => link.textContent.trim()),
-        );
+
+        const blogLinks = await page.locator('.blog a').allInnerTexts();
+        const blogsOrder = blogLinks.map((link) => link.trim());
+
         expect(blogsOrder).toEqual([
           blogs[1].title,
           blogs[2].title,
