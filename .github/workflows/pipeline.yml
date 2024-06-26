@@ -1,4 +1,3 @@
----
 name: Deployment pipeline
 
 on:
@@ -28,5 +27,3 @@ jobs:
         run: npm run test:client
       - name: Test E2E
         run: npm run test:e2e
----
-
