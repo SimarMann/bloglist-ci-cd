@@ -6,7 +6,6 @@ on:
       - main
 
 env:
-  TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
   SECRET: ${{ secrets.JWT_SECRET }}
 
 jobs:
@@ -35,4 +34,6 @@ jobs:
       - name: Test Client
         run: npm run test:client
       - name: Test E2E
+        env:
+          TEST_MONGODB_URI: mongodb://localhost:27017/test
         run: npm run test:e2e
