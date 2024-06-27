@@ -36,4 +36,5 @@ jobs:
       - name: Test E2E
         env:
           TEST_MONGODB_URI: mongodb://localhost:27017/test
+          PORT: 3003
         run: npm run test:e2e
