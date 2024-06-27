@@ -29,9 +29,9 @@ jobs:
       - name: Build
         run: npm run build
       - name: Test Server
+        env:
+          TEST_MONGODB_URI: mongodb://localhost:27017/test
         run: npm run test:server
-          env:
-            TEST_MONGODB_URI: mongodb://localhost:27017/test
       - name: Test Client
         run: npm run test:client
       - name: Test E2E
