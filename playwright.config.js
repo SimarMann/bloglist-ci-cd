@@ -64,7 +64,7 @@ module.exports = defineConfig({
     command: 'npm run test',
     url: 'http://localhost:3003',
     timeout: 120 * 1000,
-    reuseExistingServer: false,
+    reuseExistingServer: !process.env.CI,
   },
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
