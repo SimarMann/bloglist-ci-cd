@@ -20,7 +20,7 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: 'list',
   /* Configure projects for major browsers */
   projects: [
     {

@@ -9,7 +9,7 @@ require('express-async-errors');
 const app = express();
 
 mongoose.set('strictQuery', false);
-logger.info('connecting to', common.MONGODB_URI);
+logger.info('connecting to MONGODB_URI');
 mongoose
   .connect(common.MONGODB_URI)
   .then(() => {

@@ -14,6 +14,14 @@ const app = express();
 // Require is here so we can delete it from cache when files change (*)
 app.use('/api', (req, res, next) => require('@root/server')(req, res, next));
 
+app.get('/version', (req, res) => {
+  res.send('1'); // change this string to ensure a new version deployed
+});
+
+app.get('/health', (req, res) => {
+  res.send('ok');
+});
+
 /**
  *  Use "hot loading" in backend
  */
